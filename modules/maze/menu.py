@@ -15,13 +15,15 @@ class App:
     windowWidth = 500
     windowHeight = 500
 
-    def __init__(self, resolution_width: int, resolutuon_height: int,
+    def __init__(self, path: str, resolution_width: int,
+                       resolutuon_height: int,
                        standard_size: int):
         """
         Initialize app (window) with width, height, wall_size.
         And set a maze.
         """
 
+        self.path = path
         self._resolution_widtt = resolution_width
         self._resolutuon_height = resolutuon_height
         self._standard_size = standard_size
@@ -38,20 +40,11 @@ class App:
 
         pygame.display.set_caption('MAZE SOLVER MENU')
         self._running = True
- 
-    def on_event(self, event):
-        """
-        """
-        pass
-
-    def on_loop(self):
-        pass
 
     def on_render(self):
         """
         Render.
         """
-
 
         self._display_surf.fill((0,0,0))
 
@@ -79,8 +72,7 @@ class App:
         """
         Main function.
         """
-        if self.on_init() == False:
-            self._running = False
+        self.on_init()
 
         while self._running:
             self.on_render()
@@ -97,18 +89,16 @@ class App:
                     if 100 <= mouse[0] <= 400 and 50 <= mouse[1] <= 200:
                         self._running = False
                         self.on_cleanup()
-                        maze_game.main('mazefile.txt', self._resolution_widtt,
+                        maze_game.main(self.path, self._resolution_widtt,
                                                 self._resolutuon_height,
                                                 self._standard_size, 0)
 
                     if 100 <= mouse[0] <= 400 and 300 <= mouse[1] <= 450:
                         self._running = False
                         self.on_cleanup()
-                        maze_game.main('mazefile.txt', self._resolution_widtt,
+                        maze_game.main(self.path, self._resolution_widtt,
                                                 self._resolutuon_height,
                                                 self._standard_size, 1)
-
-
 
         self.on_cleanup()
 
@@ -116,11 +106,15 @@ class App:
 def run(path: str, resolution_width: int, resolutuon_height: int,
                                            standard_size: int):
     """
+    Main function.
+
+    Run a program. Requires resolution parameters (with a scale)
+    Standard size - is a size of one block.
     """
 
-    theApp = App(resolution_width, resolutuon_height, standard_size)
+    theApp = App(path, resolution_width, resolutuon_height, standard_size)
     theApp.on_execute()
 
 
 if __name__ == "__main__":
-    run('mazefile.txt', 864, 1536, 44)
+    run('maze/mazefile.txt', 864, 1536, 44)

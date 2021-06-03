@@ -37,16 +37,6 @@ class App:
 
         pygame.display.set_caption('MAZE SOLVER BACKTRACKING')
         self._running = True
- 
-    def on_event(self, event):
-        """
-        Determine quiting event.
-        """
-        if event.type == QUIT:
-            self._running = False
-
-    def on_loop(self):
-        pass
 
     def on_render(self):
         """
@@ -74,8 +64,7 @@ class App:
         """
         Main function.
         """
-        if self.on_init() == False:
-            self._running = False
+        self.on_init()
 
         if self._mode == 1:
             self.maze.find_path()
