@@ -47,7 +47,7 @@ class App:
         if self._mode == 0:
 
             self._state = self.maze.make_move()
-            pygame.time.wait(1500)
+            pygame.time.wait(1000)
 
         self.maze.draw(self._display_surf, self.wall_size)
 
