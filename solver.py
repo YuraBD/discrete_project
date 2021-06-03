@@ -57,7 +57,7 @@ leters_to_assign: {self.letters_to_assign}""")
             print('yes')
             return self.is_solved()
 
-        for digit in range(9):
+        for digit in range(10):
             if self.assign_letter(digit):
                 if self.solve():
                     return True
@@ -131,5 +131,9 @@ leters_to_assign: {self.letters_to_assign}""")
         return False
 
 if __name__=='__main__':
-    p = Solver('send', 'more', 'money')
+    # p = Solver('send', 'more', 'money')
+    # p.solve()
+    # p = Solver('abcd', 'aeeb', 'fbac')
+    # p.solve()
+    p = Solver('wait', 'tiit','damn')
     p.solve()
