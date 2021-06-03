@@ -3,42 +3,48 @@ This module contains function build_maze
 used for building maze.
 """
 
-from maze import Maze
+from maze.maze import Maze
 
 
-def build_maze(filename):
+def build_maze(path):
     """Builds a maze based on a text format in the given file."""
-    infile = open(filename, "r")
 
     # Read the size of the maze.
-    nrows, ncols = read_value_pair(infile)
+    nrows, ncols = get_rows_cols(path)
     maze = Maze(nrows, ncols)
 
-    # Read the starting and exit positions.
-    row, col = read_value_pair(infile)
-    maze.set_start(row, col)
-    row, col = read_value_pair(infile)
-    maze.set_exit(row, col)
-
     # Read the maze itself.
-    for row in range(nrows):
-        line = infile.readline()
-        for col in range(len(line)):
-            if line[col] == "*":
-                maze.set_wall(row, col)
 
-    # Close the maze file and return the newly constructed maze.
+    with open(path, mode='r', encoding='UTF-8') as infile:
+        for row in range(nrows):
+            line = infile.readline()
+            for col in range(len(line)):
+                if line[col] == "*":
+                    maze.set_wall(row, col)
+                elif line[col] == '0':
+                    maze.set_start(row, col)
+                elif line[col] == '1':
+                    maze.set_exit(row, col)
+
+    # Close the maze file.
     infile.close()
 
+    print(maze._start_cell.row, maze._start_cell.col)
+    print(maze._exit_cell.row, maze._exit_cell.col)
+
     return [maze, (nrows, ncols)]
-    #return maze
 
 
-def read_value_pair(infile):
-    """Extracts an integer value pair from the given input file."""
-    line = infile.readline()
-    val_a, val_b = line.split()
-    return int(val_a), int(val_b)
+def get_rows_cols(path: str) -> tuple :
+    """
+    Return tuple (nrows, ncols)
+    """
+
+    with open(path, mode='r', encoding="UTF-8") as maze_file:
+        lines = maze_file.readlines()
+
+    return (len(lines), len(lines[0]))
+
 
 if __name__ == "__main__":
     pass
