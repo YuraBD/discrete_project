@@ -4,6 +4,7 @@ Contains Solver class.
 """
 from mod_list import ModificatedList
 from letter import Letter
+from auxiliary import print_final
 import pygame
 
 
@@ -95,11 +96,13 @@ leters_to_assign: {self.letters_to_assign}""")
         sum_word_num = self.make_num(self.words[2])
 
         if Solver.check_sum(first_word_num, second_word_num, sum_word_num):
-            print('done')
+            print_final(self)
+
+
             return True
 
         else:
-            print('not done')
+            print('Once more')
 
             return False
 
@@ -130,10 +133,13 @@ leters_to_assign: {self.letters_to_assign}""")
             return True
         return False
 
+
+
+
 if __name__=='__main__':
     # p = Solver('send', 'more', 'money')
     # p.solve()
-    # p = Solver('abcd', 'aeeb', 'fbac')
-    # p.solve()
-    p = Solver('wait', 'tiit','damn')
+    p = Solver('edtg', 'uikf', 'dokim')
     p.solve()
+
+
