@@ -11,12 +11,13 @@ class App:
     """
 
     def __init__(self, maze: Maze, width: int,
-                 height: int, wall_size: int):
+                 height: int, wall_size: int, mode: int):
         """
         Initialize app (window) with width, height, wall_size.
         And set a maze.
         """
 
+        self._mode = mode
         self._state = None
         self._running = True
         self._display_surf = None
@@ -53,12 +54,13 @@ class App:
         """
         self._display_surf.fill((0,0,0))
 
-        self._state = self.maze.make_move()
-        # time.sleep(1.5)
-        pygame.time.wait(1500)
+        if self._mode == 0:
 
+            self._state = self.maze.make_move()
+            pygame.time.wait(1500)
 
         self.maze.draw(self._display_surf, self.wall_size)
+
 
         pygame.display.flip()
  
@@ -74,6 +76,9 @@ class App:
         """
         if self.on_init() == False:
             self._running = False
+
+        if self._mode == 1:
+            self.maze.find_path()
 
         while( self._running ) and (self._state is None):
             self.on_render()
@@ -99,7 +104,7 @@ class App:
 
 
 def main(path: str, resolution_width: int, resolutuon_height: int,
-                                           standard_size: int):
+                            standard_size: int, mode: int):
     """
     Run a program. Requires resolution parameters (with a scale)
     Standard size - is a size of one block.
@@ -122,10 +127,10 @@ def main(path: str, resolution_width: int, resolutuon_height: int,
     screen_width = standard_size * ncols
     screen_height = standard_size * nrows
 
-    theApp = App(maze, screen_width, screen_height, standard_size)
+    theApp = App(maze, screen_width, screen_height, standard_size, mode)
     theApp.on_execute()
 
 
 if __name__ == "__main__" :
-    main('mazefile.txt', 864, 1536, 44)
+    main('mazefile.txt', 864, 1536, 44, 1)
     # main('mazefile1.txt', 864, 1536, 44)

@@ -50,13 +50,15 @@ class Maze:
                                                  wall_size,
                                                  wall_size))
 
-        curr_row = self._curr_cell.row
-        curr_col = self._curr_cell.col
-        pygame.draw.rect(display_surf, (255, 0, 0),
-                         pygame.Rect(curr_col*wall_size,
-                                     curr_row*wall_size,
-                                     wall_size,
-                                     wall_size), 3)
+        if self._curr_cell is not None:
+
+            curr_row = self._curr_cell.row
+            curr_col = self._curr_cell.col
+            pygame.draw.rect(display_surf, (255, 0, 0),
+                            pygame.Rect(curr_col*wall_size,
+                                        curr_row*wall_size,
+                                        wall_size,
+                                        wall_size), 3)
 
     def num_rows(self) -> int:
         """Returns the number of rows in the maze."""
