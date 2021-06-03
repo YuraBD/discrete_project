@@ -152,7 +152,7 @@ class Board:
 def run_solver():
     """Run sudoku solver"""
     board = Board()
-    board.from_file("sudoku.txt")
+    board.from_file("sudoku/sudoku.txt")
     board.screen.fill((247, 255, 163))
 
     text_1 = board.font.render("Solve with animation", 1, (255, 255, 255))

@@ -260,3 +260,5 @@ class Crossword:
 if __name__ == "__main__":
     crossword = Crossword(PATH)
     crossword.solver()
+    while True:
+        pass
