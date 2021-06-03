@@ -3,7 +3,7 @@ This module contains function build_maze
 used for building maze.
 """
 
-from maze import Maze
+from maze.maze import Maze
 
 
 def build_maze(filename):

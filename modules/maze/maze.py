@@ -1,8 +1,8 @@
 """Implemention of the Maze ADT using a 2-D array."""
 
 import pygame
-from arrays import Array2D
-from lliststack import Stack
+from maze.arrays import Array2D
+from maze.lliststack import Stack
 
 
 class Maze:

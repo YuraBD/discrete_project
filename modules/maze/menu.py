@@ -2,7 +2,7 @@
 """
 from pygame.locals import *
 import pygame
-import maze_game
+from maze import maze_game
 
 pygame.font.init()
 font = pygame.font.SysFont('comicsans', 40)

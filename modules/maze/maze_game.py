@@ -1,7 +1,7 @@
 from pygame.locals import *
 import pygame
-from buildmaze import build_maze
-from maze import Maze
+from maze.buildmaze import build_maze
+from maze.maze import Maze
 import time
 
 
