@@ -1,14 +1,40 @@
+"""
+Module for solving the Cryparithetic Puzzle.
+Contains Solver class.
+"""
 from mod_list import ModificatedList
 from letter import Letter
 import pygame
+
+
 class Solver:
+    """
+    Solver class. Contains the following methods: __init__, __solve__,
+    assign_letter, unassign_letter, is_solved, make_num.
+    Static methods: get_letters, check_sum
+    """
+
     def __init__(self, first_word, second_word, sum_word):
+        """
+        Main method. Is being called when the object of Solver class is created
+        :param first_word: first word
+        :param second_word: second word
+        :param sum_word: summary word
+        """
         self.letters_to_assign = Solver.get_letters(first_word, second_word, sum_word)
-        # self.assigned_letters = ModificatedDict()
         self.assigned_letters = ModificatedList()
         self.letters_num = len(self.letters_to_assign)
+        self.words = (first_word, second_word, sum_word)
+
     @staticmethod
     def get_letters(first_word, second_word, sum_word):
+        """
+        Creates a list of different letters in these words.
+        :param first_word: first word
+        :param second_word: second word
+        :param sum_word: summary word
+        :return: list of letters (Letter class)
+        """
         letters = []
         for word in [first_word, second_word, sum_word]:
             for letter in word:
@@ -20,6 +46,10 @@ class Solver:
         return new_letters
 
     def solve(self):
+        """
+        Recursive method. Assign every letter a number, the checks arithmetic to see if works
+        :return: boolean value
+        """
         print(f"""assigned_letters  : {self.assigned_letters}
 leters_to_assign: {self.letters_to_assign}""")
 
@@ -27,21 +57,27 @@ leters_to_assign: {self.letters_to_assign}""")
             print('yes')
             return self.is_solved()
 
-            # solve(letters_to_assign, assigned_letters)
         for digit in range(9):
             if self.assign_letter(digit):
                 if self.solve():
                     return True
                 self.unassign_letter()
 
-
     def unassign_letter(self):
+        """
+        Unassign the digit from letter
+        :return: None
+        """
         letter = self.assigned_letters.pop()
         self.letters_to_assign.append(letter)
 
-
     def assign_letter(self, digit):
-        letter =self.letters_to_assign[-1]
+        """
+        Assign digit to the letter
+        :param digit: digit
+        :return: boolean value
+        """
+        letter = self.letters_to_assign[-1]
         if self.assigned_letters.is_containing_digit(digit):
             self.letters_to_assign[-1].set_digit(digit)
             letter = self.letters_to_assign.pop()
@@ -49,35 +85,14 @@ leters_to_assign: {self.letters_to_assign}""")
             return True
         return False
 
-
-
-
-
-
-
-
-
-    # def assign_letter(self, digit):
-    #     letter = self.letters_to_assign[-1]
-    #     print(f'letter.checked {self.letters_to_assign[-1].checked}')
-    #     if self.assigned_letters.is_not_contained(digit) and digit not in letter.checked:
-    #         self.assigned_letters[letter] = digit
-    #         self.letters_to_assign[-1].add_to_checked(digit)
-    #         self.letters_to_assign[-1].counter += 1
-    #         print(self.letters_to_assign[-1].checked)
-    #         self.letters_to_assign.pop()
-    #
-    #         return True
-    #
-    #     return False
-    #
     def is_solved(self):
-        first_word_num = self.make_num('send')
-        second_word_num = self.make_num('more')
-        sum_word_num = self.make_num('money')
-        # if self.assigned_letters[-1].digit == 7 and self.assigned_letters[-3].digit == 2:
-        #     print('done')
-        #     return True
+        """
+        Method to  check arithmetic to see if works
+        :return: boolean value
+        """
+        first_word_num = self.make_num(self.words[0])
+        second_word_num = self.make_num(self.words[1])
+        sum_word_num = self.make_num(self.words[2])
 
         if Solver.check_sum(first_word_num, second_word_num, sum_word_num):
             print('done')
@@ -89,21 +104,32 @@ leters_to_assign: {self.letters_to_assign}""")
             return False
 
     def make_num(self, word):
+        """
+        Method to make a number form the word
+        :param word:
+        :return: int value of word
+        """
         str_num = ''
         for symbol in word:
             for letter in self.assigned_letters:
-                if letter._str_value==symbol:
-                    str_num+=str(letter.get_digit())
+                if letter._str_value == symbol:
+                    str_num += str(letter.get_digit())
         num = int(str_num)
         return num
 
     @staticmethod
     def check_sum(num_1, num_2, num_3):
+        """
+        Method to check if the sum of first and second numbers is equal to the third number
+        :param num_1: first number
+        :param num_2: second number
+        :param num_3: third number
+        :return: boolean value
+        """
         if num_1 + num_2 == num_3:
             return True
         return False
 
-
-
-p = Solver('send', 'more', 'money')
-p.solve()
+if __name__=='__main__':
+    p = Solver('send', 'more', 'money')
+    p.solve()

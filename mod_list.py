@@ -1,3 +1,8 @@
+"""
+Modificated list. The only reason I created it is to make simple printing
+"""
+
+
 class ModificatedList:
     def __init__(self):
         self._lst = []
@@ -33,4 +38,3 @@ class ModificatedList:
         if item in self._lst:
             return True
         return False
-
