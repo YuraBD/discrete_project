@@ -29,9 +29,6 @@ def build_maze(path):
     # Close the maze file.
     infile.close()
 
-    print(maze._start_cell.row, maze._start_cell.col)
-    print(maze._exit_cell.row, maze._exit_cell.col)
-
     return [maze, (nrows, ncols)]
 
 

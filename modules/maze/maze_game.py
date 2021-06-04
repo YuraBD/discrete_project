@@ -48,13 +48,12 @@ class App:
 
             self._state = self.maze.make_move()
             pygame.time.wait(100)
-            pygame.time.wait(1000)
 
         self.maze.draw(self._display_surf, self.wall_size)
 
 
         pygame.display.flip()
- 
+
     def on_cleanup(self):
         """
         Exit the app.
