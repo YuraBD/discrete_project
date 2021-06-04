@@ -257,7 +257,7 @@ class Crossword:
         return lst
 
 
-if __name__ == "__main__":
+def run_crossword():
     crossword = Crossword(PATH)
     crossword.solver()
     while True:
