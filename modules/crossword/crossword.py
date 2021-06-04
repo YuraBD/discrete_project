@@ -4,12 +4,11 @@ Module for the crossword solving algorithm.
 import time
 import pygame
 
-pygame.init()
-screen = pygame.display.set_mode((765, 510))
+PATH = "crossword/crossword.txt"
+pygame.font.init()
+font = pygame.font.SysFont('comicsans', 40)
 
-PATH = "crossword.txt"
-
-def show_matrix(lst):
+def show_matrix(lst, screen):
     """
     Function is used for representing the current matrix.
     """
@@ -23,7 +22,6 @@ def show_matrix(lst):
                 letter = ''
                 color = 'white'
             pygame.draw.rect(screen, color, pygame.Rect(x, y, 50, 50))
-            font = pygame.font.SysFont(None, 40)
             img = font.render(letter, True, 'blue')
             screen.blit(img, (x + 19, y + 12))
             x += 51
@@ -128,6 +126,9 @@ class Crossword:
         using backtracking algorithm.
         Return a list that contains the final (solved) crossword.
         """
+        pygame.init()
+        screen = pygame.display.set_mode((765, 510))
+ 
         matrix = self.grid
         words = self.words
 
@@ -137,7 +138,7 @@ class Crossword:
             Recursive function that is used for backtracking.
             """
 
-            show_matrix(matrix)
+            show_matrix(matrix, screen)
             time.sleep(0.5)
 
 
@@ -252,7 +253,7 @@ class Crossword:
 
         lst = []
         solve_crossword(matrix, words, 0)
-        show_matrix(lst[0])
+        show_matrix(lst[0], screen)
         time.sleep(5)
         return lst
 
@@ -262,3 +263,7 @@ def run_crossword():
     crossword.solver()
     while True:
         pass
+
+
+if __name__ == "__main__":
+    run_crossword()

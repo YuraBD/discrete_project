@@ -7,7 +7,7 @@ def run_coloring_graph():
 
     pygame.display.set_caption("Coloring graph")
 
-    with open("graph.txt", "r") as info:
+    with open("coloring_graph/graph.txt", "r") as info:
         lines = info.readlines()
 
     graph = []
