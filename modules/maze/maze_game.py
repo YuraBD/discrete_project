@@ -47,7 +47,11 @@ class App:
         if self._mode == 0:
 
             self._state = self.maze.make_move()
+<<<<<<< HEAD:modules/maze/maze_game.py
             pygame.time.wait(100)
+=======
+            pygame.time.wait(1000)
+>>>>>>> origin/maze:maze_game.py
 
         self.maze.draw(self._display_surf, self.wall_size)
 
