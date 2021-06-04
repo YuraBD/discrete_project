@@ -18,6 +18,7 @@ def build_maze(path):
     with open(path, mode='r', encoding='UTF-8') as infile:
         for row in range(nrows):
             line = infile.readline()
+            line = line.strip()
             for col in range(len(line)):
                 if line[col] == "*":
                     maze.set_wall(row, col)
@@ -37,8 +38,11 @@ def get_rows_cols(path: str) -> tuple :
     Return tuple (nrows, ncols)
     """
 
+    lines = []
     with open(path, mode='r', encoding="UTF-8") as maze_file:
-        lines = maze_file.readlines()
+        for line in maze_file:
+            line = line.strip()
+            lines.append(line)
 
     return (len(lines), len(lines[0]))
 
