@@ -8,6 +8,7 @@ from auxiliary import print_final
 import pygame
 
 
+
 class Solver:
     """
     Solver class. Contains the following methods: __init__, __solve__,
@@ -26,6 +27,8 @@ class Solver:
         self.assigned_letters = ModificatedList()
         self.letters_num = len(self.letters_to_assign)
         self.words = (first_word, second_word, sum_word)
+        self.set_up()
+
 
     @staticmethod
     def get_letters(first_word, second_word, sum_word):
@@ -53,6 +56,7 @@ class Solver:
         """
         print(f"""assigned_letters  : {self.assigned_letters}
 leters_to_assign: {self.letters_to_assign}""")
+        self.draw_numbers()
 
         if len(self.letters_to_assign) == 0:
             print('yes')
@@ -134,12 +138,76 @@ leters_to_assign: {self.letters_to_assign}""")
         return False
 
 
+    def set_up(self):
+
+        pygame.init()
+        self.myfont = pygame.font.SysFont('timesnewroman',  25)
+        colors = [(218, 247, 166),( 255, 195, 0 )]
+        pygame.font.init()
+        self.screen = pygame.display.set_mode((100*self.letters_num, 50))
+        pygame.display.set_caption("SUDOKU SOLVER USING BACKTRACKING")
+        self.screen.fill((49,150,100))
+        pygame.display.flip()
+        for i in range(self.letters_num):
+            pygame.draw.rect(self.screen, colors[i%2], pygame.Rect(100*i , 0 , 100, 50))
+            pygame.display.flip()
+
+        for i in range(self.letters_num):
+            text = str(self.letters_to_assign[i])+ ':'
+            textsurface = self.myfont.render(text, False, (0, 0, 0))
+            self.screen.blit(textsurface, (15+ i*100, 12))
+
+            pygame.display.flip()
+
+    def draw_numbers(self):
+        colors = [(218, 247, 166), (255, 195, 0)]
+        numbers_len = len(self.assigned_letters)
+        for i in range(10):
+            pygame.draw.rect(self.screen, colors[i%2], pygame.Rect(100*i+50 , 0 , 50, 50))
+            pygame.display.flip()
+        for i in range(numbers_len):
+            text =str(self.assigned_letters[i].get_digit())
+            textsurface = self.myfont.render(text, False, (0, 0, 0))
+            self.screen.blit(textsurface, (65+ i*100, 12))
+
+            pygame.display.flip()
+
+
+
+
+
+
 
 
 if __name__=='__main__':
+    p = Solver('send', 'more', 'money')
+    p.solve()
     # p = Solver('send', 'more', 'money')
     # p.solve()
-    p = Solver('edtg', 'uikf', 'dokim')
-    p.solve()
+
+    # pygame.font.init()
+    # screen = pygame.display.set_mode((300, 300))
+    # pygame.display.set_caption("SUDOKU SOLVER USING BACKTRACKING")
+    # screen.fill((49, 150, 100))
+    # pygame.display.flip()
+    # for i in range(2):
+    #     pygame.draw.line(screen, (100, 100, 100), (10, 10), (50, 50), 10)
+    # pygame.font.init()
+    # screen = pygame.display.set_mode((1000, 50))
+    # pygame.display.set_caption("SUDOKU SOLVER USING BACKTRACKING")
+    # screen.fill((49, 150, 100))
+    # pygame.display.flip()
+    # a=0
+    # i=0
+    # while True:
+    #     pygame.draw.rect(screen, (255, a, 51), pygame.Rect(100*i , 0 , 100, 50))
+    #     pygame.display.flip()
+    #     a+=2
+    #     if a>255:
+    #         a=0
+    #     i+=1
+
+
+
 
 

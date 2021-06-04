@@ -38,3 +38,6 @@ class ModificatedList:
         if item in self._lst:
             return True
         return False
+
+    def __len__(self):
+        return len(self._lst)
