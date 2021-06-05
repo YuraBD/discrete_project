@@ -2,9 +2,9 @@
 Module for solving the Cryparithetic Puzzle.
 Contains Solver class.
 """
-from mod_list import ModificatedList
-from letter import Letter
-from auxiliary import print_final
+from puzzle.mod_list import ModificatedList
+from puzzle.letter import Letter
+# from auxiliary import print_final
 import pygame
 
 
@@ -100,7 +100,8 @@ leters_to_assign: {self.letters_to_assign}""")
         sum_word_num = self.make_num(self.words[2])
 
         if Solver.check_sum(first_word_num, second_word_num, sum_word_num):
-            print_final(self)
+            # print_final(self)
+            print('won')
 
 
             return True
@@ -174,7 +175,9 @@ leters_to_assign: {self.letters_to_assign}""")
 
 
 
-
+def run_puzzle_solver():
+    p = Solver('send', 'more', 'money')
+    p.solve()
 
 
 

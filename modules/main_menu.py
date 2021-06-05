@@ -3,6 +3,7 @@ from crossword.crossword import run_crossword
 from sudoku.sudoku import run_solver, Button
 from maze.menu import run
 from coloring_graph.main import run_coloring_graph
+from puzzle.solver import run_puzzle_solver
 
 
 
@@ -49,7 +50,7 @@ def run_menu():
                     run_coloring_graph()
                     flag_1 = False
                 elif button_5.is_pressed(event):
-                    print("not ready")
+                    run_puzzle_solver()
                     flag_1 = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q and not flag_1:
