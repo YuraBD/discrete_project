@@ -4,6 +4,7 @@ Contains Solver class.
 """
 from puzzle.mod_list import ModificatedList
 from puzzle.letter import Letter
+
 # from auxiliary import print_final
 import pygame
 
@@ -152,9 +153,10 @@ leters_to_assign: {self.letters_to_assign}""")
         for i in range(self.letters_num):
             pygame.draw.rect(self.screen, colors[i%2], pygame.Rect(100*i , 0 , 100, 50))
             pygame.display.flip()
-
+        inverted_letters = list(reversed(self.letters_to_assign))
+        print(inverted_letters)
         for i in range(self.letters_num):
-            text = str(self.letters_to_assign[i])+ ':'
+            text = str(inverted_letters[i])+ ':'
             textsurface = self.myfont.render(text, False, (0, 0, 0))
             self.screen.blit(textsurface, (15+ i*100, 12))
 
@@ -176,7 +178,9 @@ leters_to_assign: {self.letters_to_assign}""")
 
 
 def run_puzzle_solver():
-    p = Solver('send', 'more', 'money')
+    # p = Solver('send', 'more', 'money')
+    # p.solve()
+    p = Solver('s', 'm', 'o')
     p.solve()
 
 

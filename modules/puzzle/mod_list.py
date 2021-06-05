@@ -41,3 +41,6 @@ class ModificatedList:
 
     def __len__(self):
         return len(self._lst)
+
+    def reverse(self):
+        return list(reversed(self._lst))
