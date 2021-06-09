@@ -57,7 +57,7 @@ while run:
     g = Graph(l)
     g.graph = graph
     m = l
-    color = g.graphColouring(m)
+    color = g.graph_colouring(m)
 
     for i in range(len(color)):
         color[i] = colorrange[color[i] - 1]
