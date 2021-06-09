@@ -5,7 +5,6 @@ Contains Solver class.
 from puzzle.mod_list import ModificatedList
 from puzzle.letter import Letter
 
-# from auxiliary import print_final
 import pygame
 
 
@@ -55,12 +54,10 @@ class Solver:
         Recursive method. Assign every letter a number, the checks arithmetic to see if works
         :return: boolean value
         """
-        print(f"""assigned_letters  : {self.assigned_letters}
-leters_to_assign: {self.letters_to_assign}""")
+
         self.draw_numbers()
 
         if len(self.letters_to_assign) == 0:
-            print('yes')
             return self.is_solved()
 
         for digit in range(10):
@@ -101,14 +98,12 @@ leters_to_assign: {self.letters_to_assign}""")
         sum_word_num = self.make_num(self.words[2])
 
         if Solver.check_sum(first_word_num, second_word_num, sum_word_num):
-            # print_final(self)
-            print('won')
+
 
 
             return True
 
         else:
-            print('Once more')
 
             return False
 
@@ -154,7 +149,6 @@ leters_to_assign: {self.letters_to_assign}""")
             pygame.draw.rect(self.screen, colors[i%2], pygame.Rect(100*i , 0 , 100, 50))
             pygame.display.flip()
         inverted_letters = list(reversed(self.letters_to_assign))
-        print(inverted_letters)
         for i in range(self.letters_num):
             text = str(inverted_letters[i])+ ':'
             textsurface = self.myfont.render(text, False, (0, 0, 0))
@@ -178,39 +172,14 @@ leters_to_assign: {self.letters_to_assign}""")
 
 
 def run_puzzle_solver():
-    # p = Solver('send', 'more', 'money')
-    # p.solve()
-    p = Solver('s', 'm', 'o')
+
+    p = Solver('abcd', 'caae', 'dcdf')
     p.solve()
 
 
 
 
-if __name__=='__main__':
-    p = Solver('send', 'more', 'money')
-    p.solve()
-    # p = Solver('send', 'more', 'money')
-    # p.solve()
-
-    # pygame.font.init()
-    # screen = pygame.display.set_mode((300, 300))
-    # pygame.display.set_caption("SUDOKU SOLVER USING BACKTRACKING")
-    # screen.fill((49, 150, 100))
-    # pygame.display.flip()
-    # for i in range(2):
-    #     pygame.draw.line(screen, (100, 100, 100), (10, 10), (50, 50), 10)
-    # pygame.font.init()
-    # screen = pygame.display.set_mode((1000, 50))
-    # pygame.display.set_caption("SUDOKU SOLVER USING BACKTRACKING")
-    # screen.fill((49, 150, 100))
-    # pygame.display.flip()
-    # a=0
-    # i=0
-    # while True:
-    #     pygame.draw.rect(screen, (255, a, 51), pygame.Rect(100*i , 0 , 100, 50))
-    #     pygame.display.flip()
-    #     a+=2
-    #     if a>255:
-    #         a=0
-    #     i+=1
-
+# if __name__=='__main__':
+#     p = Solver('send', 'more', 'money')
+#     p.solve()
+    
